@@ -66,7 +66,9 @@
   var inputQuantity = $("quantity");
   var inputCategory = $("category");
   var categoryOptions = $("category-options");
-  var subtitle = $("subtitle");
+  var productCount = $("product-count");
+  var costTotal = $("cost-total");
+  var priceTotal = $("price-total");
   var filters = $("filters");
   var list = $("list");
   var exportBtn = $("export-btn");
@@ -333,11 +335,16 @@
       .filter(function (p) { return categoriaActiva === "Todas" || p.category === categoriaActiva; })
       .sort(function (a, b) { return b.createdAt - a.createdAt; });
 
-    // Encabezado: cantidad y valor total del inventario
-    var total = visibles.reduce(function (suma, p) { return suma + p.price * p.quantity; }, 0);
-    subtitle.textContent =
-      visibles.length + " " + (visibles.length === 1 ? "producto" : "productos") +
-      " · valor total en inventario " + formatoMoneda.format(total);
+    // Encabezado: cantidad y valores totales al costo y al precio de venta
+    var totales = visibles.reduce(function (suma, p) {
+      suma.costo += p.cost * p.quantity;
+      suma.venta += p.price * p.quantity;
+      return suma;
+    }, { costo: 0, venta: 0 });
+    productCount.textContent =
+      visibles.length + " " + (visibles.length === 1 ? "producto" : "productos");
+    costTotal.textContent = formatoMoneda.format(totales.costo);
+    priceTotal.textContent = formatoMoneda.format(totales.venta);
 
     // Sugerencias de categoría en el formulario
     categoryOptions.innerHTML = cats
@@ -452,7 +459,7 @@
 
   /* ---------- Inicio ---------- */
 
-  $("header-icon").innerHTML = icono("package", 24);
+  $("header-icon").innerHTML = '<img src="assets/logo-kroma.jpg" alt="Logo de Kroma">';
   photoPlaceholder.innerHTML = icono("imagePlus", 24);
   cancelBtn.innerHTML = icono("x", 16) + "Cancelar";
   actualizarTextosFormulario();
