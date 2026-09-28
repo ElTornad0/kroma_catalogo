@@ -1,0 +1,28 @@
+REGISTRO DE PRODUCTOS
+=====================
+
+Como usarlo
+-----------
+1. Abri esta carpeta en VS Code (Archivo > Abrir carpeta).
+2. Abri index.html con doble clic en tu navegador
+   (o con la extension "Live Server" de VS Code, clic derecho > Open with Live Server).
+
+Archivos
+--------
+index.html      -> la pagina
+css/styles.css  -> los estilos
+js/app.js       -> la logica (agregar, editar, eliminar, filtrar)
+favicon.ico     -> el icono de la pestana
+
+Donde se guardan los datos
+--------------------------
+En el navegador donde uses la pagina (localStorage). No hay servidor ni base de datos.
+- Si abris la pagina en otro navegador u otra computadora, vas a verla vacia.
+- Si borras los datos del navegador, se pierden los productos.
+- Usa los botones "Descargar copia" y "Restaurar copia" (al final de la pagina)
+  para hacer respaldos o pasar los productos a otro navegador.
+
+Cambiar la moneda
+-----------------
+En js/app.js, al principio, edita MONEDA e IDIOMA.
+Para pesos argentinos:  MONEDA = "ARS"  e  IDIOMA = "es-AR"
